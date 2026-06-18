@@ -1,0 +1,25 @@
+#java file
+target/
+*.class
+*.jar
+
+#logs
+*.log
+
+#env files
+
+.env
+.env.*
+
+#terraform 
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+#ansible
+*.retry
+
+#os-files
+
+.DS_Store
+Thumbs.db
