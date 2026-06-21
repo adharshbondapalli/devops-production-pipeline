@@ -1,0 +1,19 @@
+pipeline{
+   agent any
+   stages{
+
+     stage('checkout'){
+     steps{
+        checkout scm    
+}
+}
+        stage('build'){ steps{ sh 'cd app && mvn clean package -DskipTests'}}
+        stage('unit test'){steps{sh 'cd app && mvn test'}}
+       stage('code quality'){steps{echo 'SonarQube scan will go here'}}
+        
+
+
+}
+
+
+}
