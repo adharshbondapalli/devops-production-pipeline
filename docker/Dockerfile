@@ -4,7 +4,7 @@ WORKDIR /build
 
 COPY app/ .
 
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests -Dmaven.gitcommitid.skip=true
 
 FROM eclipse-temurin:17-jre AS RELEASE
 
