@@ -10,7 +10,7 @@ pipeline{
         stage('build'){ steps{ sh 'cd app && mvn clean package -DskipTests'}}
         stage('unit test'){steps{sh 'cd app && mvn test'}}
        stage('code quality'){steps{echo 'SonarQube scan will go here'}}
-        
+       stage('docker build'){steps{sh 'docker build -t petclinic:${BUILD_NUMBER} -f docker/Dockerfile'}} 
 
 
 }
