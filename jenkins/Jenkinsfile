@@ -11,6 +11,23 @@ pipeline{
         stage('unit test'){steps{sh 'cd app && mvn test'}}
        stage('code quality'){steps{echo 'SonarQube scan will go here'}}
        stage('docker build'){steps{sh 'docker build -t petclinic:${BUILD_NUMBER} -f docker/Dockerfile .'}} 
+       stage('Login to ECR') {
+    steps {
+        sh '''
+        aws ecr get-login-password --region us-east-1 | \
+        docker login --username AWS --password-stdin 784231401315.dkr.ecr.us-east-1.amazonaws.com
+        '''
+    }
+}
+
+stage('Tag and Push to ECR') {
+    steps {
+        sh '''
+        docker tag petclinic:${BUILD_NUMBER} 784231401315.dkr.ecr.us-east-1.amazonaws.com/petclinic:${BUILD_NUMBER}
+        docker push 784231401315.dkr.ecr.us-east-1.amazonaws.com/petclinic:${BUILD_NUMBER}
+        '''
+    }
+}
 
 
 }
